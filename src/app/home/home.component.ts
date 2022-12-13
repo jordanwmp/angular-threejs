@@ -21,8 +21,8 @@ export class HomeComponent implements OnInit {
       url: '',
     },
     {
-      label: 'Light',
-      url: '',
+      label: 'Move Light with mouse',
+      url: '/move-light',
     },
     {
       label: 'Movimentar objeto',

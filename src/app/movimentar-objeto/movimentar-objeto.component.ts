@@ -1,8 +1,6 @@
 import { Component, OnInit, AfterViewInit, ElementRef, Input, ViewChild } from '@angular/core';
-
 import { HostListener } from '@angular/core';
 import * as THREE from 'three'
-import { Mesh } from 'three';
 
 const WIDTH = window.innerWidth
 const HEIGHT = window.innerHeight
@@ -36,17 +34,14 @@ export class MovimentarObjetoComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
-    //this.createScene()
   }
 
   ngAfterViewInit()
   {
-    console.log('after init')
-    this.createScene2()
+    this.createScene()
     this.rotateCube()
   }
 
-  
   setDirection(key:string)
   {
     switch(key)
@@ -73,7 +68,7 @@ export class MovimentarObjetoComponent implements OnInit, AfterViewInit {
     console.log('top ', TOP)
   }
 
-  createScene2()
+  createScene()
   {
     this.scene = new THREE.Scene()
     this.renderer = new THREE.WebGLRenderer()
@@ -98,57 +93,30 @@ export class MovimentarObjetoComponent implements OnInit, AfterViewInit {
     spotLight.target = plane//APONTA O CONE DE LUZ PARA O PLANO
     this.scene.add(spotLight)
 
-    //let cubeGeometry = new THREE.BoxGeometry(6,6,6)
-    //let cubeMaterial = new THREE.MeshLambertMaterial({color: 0xFF0000})
-    //let cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-
     this.cube.position.y = 6
     
-
     this.scene.add(this.cube)
 
     this.camera.position.x = -30
     this.camera.position.y = 40
     this.camera.position.z = 30
 
-   
-    //GARANTE QUE A this.CAMERA ESTEJA OLHANDO PARA OS OBJETOS
     this.camera.lookAt(this.scene.position)
 
     window.document.getElementById("webGL-output")
     ?.appendChild(this.renderer.domElement)
-
-    //RENDERIZA A CENA E A this.CAMERA
     this.renderer.render(this.scene, this.camera)
     
 
   }
 
-  animateCallback = {
-    callAnimate: (this.rotateCube).bind(this)
-  };
-  //this.animateCallback.callAnimate();
-
   rotateCube()
   {
-    //setTimeout(()=>{
-      //requestAnimationFrame( this.animateCallback.callAnimate );
       requestAnimationFrame((this.rotateCube).bind(this));
-      //this.cube.position.x = 10
-      //this.cube.rotation.x += 0.02
-      //this.cube.rotation.y += 0.02
-
       this.cube.position.x = LEFT
       this.cube.position.y = TOP
       this.cube.position.z = RIGHT
-
-
-      /*window.document.getElementById("webGL-output")
-     ?.appendChild(this.renderer.domElement)*/
-
       this.renderer.render(this.scene, this.camera)
-    //}, 3000)
-    //requestAnimationFrame(this.rotateCube.bind(this));
   }
 
 
