@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { MovimentarObjetoComponent } from './movimentar-objeto/movimentar-objeto.component';
 import { MoveCameraComponent } from './move-camera/move-camera.component';
 import { MoveLightComponent } from './move-light/move-light.component';
+import { SunComponent } from './sun/sun.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { MoveLightComponent } from './move-light/move-light.component';
     HomeComponent,
     MovimentarObjetoComponent,
     MoveCameraComponent,
-    MoveLightComponent
+    MoveLightComponent,
+    SunComponent
   ],
   imports: [
     BrowserModule,

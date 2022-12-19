@@ -9,15 +9,15 @@ export class HomeComponent implements OnInit {
 
   menu:any[] = [
     {
-      label: 'Movimento câmera',
+      label: 'Move camera',
       url: '',
     },
     {
-      label: 'Modelo Sol',
-      url: '',
+      label: 'Sun',
+      url: '/sun',
     },
     {
-      label: 'Animação Sol',
+      label: 'Sun animation',
       url: '',
     },
     {
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       url: '/move-light',
     },
     {
-      label: 'Movimentar objeto',
+      label: 'Move object',
       url: '/movimentar-objeto',
     }
   ]
