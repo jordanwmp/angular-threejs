@@ -4,9 +4,11 @@ import { HomeComponent } from './home/home.component';
 import { MoveLightComponent } from './move-light/move-light.component';
 import { MovimentarObjetoComponent } from './movimentar-objeto/movimentar-objeto.component';
 import { SceneComponent } from './scene/scene.component';
+import { SolarSystemComponent } from './solar-system/solar-system.component';
 import { SunComponent } from './sun/sun.component';
 
 const routes: Routes = [
+  {component: SolarSystemComponent, path: 'solar-system'},
   {component: SunComponent, path: 'sun'},
   {component: MoveLightComponent, path: 'move-light'},
   {component: MovimentarObjetoComponent, path: 'movimentar-objeto'},

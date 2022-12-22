@@ -84,6 +84,9 @@ export class SunComponent implements OnInit, AfterViewInit {
     this.scene.add(this.camera)
 
     //boom renderer
+    /**
+     * renderizará nossa cena com nossa câmera no primeiro alvo de renderização
+     */
     const renderScene = new RenderPass(this.scene, this.camera)
 
     const bloomPass = new UnrealBloomPass(
@@ -97,6 +100,7 @@ export class SunComponent implements OnInit, AfterViewInit {
     bloomPass.strength = 2 //intensidade do brilho
     bloomPass.radius = 0
 
+    //sua entrada para um alvo de renderização geralmente menor e desfoca o resultado
     const bloomComposer = new EffectComposer(this.renderer)
     bloomComposer.setSize(window.innerWidth, window.innerHeight)
     bloomComposer.renderToScreen = true 
@@ -130,10 +134,11 @@ export class SunComponent implements OnInit, AfterViewInit {
     
     this.camera.lookAt(sphere.position)
     this.camera.layers.set(1)
-    bloomComposer.render()
+    //bloomComposer.render()
     
     window.document.getElementById("webgl")?.appendChild(this.renderer.domElement)
-    this.renderer.render(this.scene, this.camera)
+    //this.renderer.render(this.scene, this.camera)
+    bloomComposer.render()
 
   }
 }

@@ -13,6 +13,10 @@ export class HomeComponent implements OnInit {
       url: '',
     },
     {
+      label:'Solar System',
+      url:'/solar-system'
+    },
+    {
       label: 'Sun',
       url: '/sun',
     },
