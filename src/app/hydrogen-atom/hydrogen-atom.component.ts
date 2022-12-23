@@ -3,9 +3,12 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { Rotation } from '../Rotation';
 
-const colorProton:string = "#5cb85c";
+const colorProton:string = "#09a837" //"#5cb85c";
 const colorEletron:string = "#5bc0de";
 const colorLine:string = "#dfe3ee"
+
+const marsTexturePath:string = "../../assets/textures/red_2.jpg"
+
 
 @Component({
   selector: 'app-hydrogen-atom',
@@ -34,10 +37,22 @@ export class HydrogenAtomComponent implements AfterViewInit {
     this.scene = new THREE.Scene()
 
 
+    const pointLight = new THREE.PointLight(0xFFFFFF, 0.5)
+    const ambientLight = new THREE.AmbientLight(0xFFFFFF)
+    this.scene.add(ambientLight) 
+    //this.scene.add(pointLight)
+
+    //REFERENCE
+    const refGeometry = new THREE.SphereGeometry(0.4)
+    const refMaterial =  new THREE.MeshBasicMaterial()
+    const refMesh = new THREE.Mesh(refGeometry, refMaterial) 
+    
     //PROTON
-    const hydrogenGeo = new THREE.SphereGeometry(0.5)
-    const hydrogenMaterial = new THREE.MeshNormalMaterial() //MeshBasicMaterial({color: colorProton})
+    const hydrogenGeo = new THREE.SphereGeometry(0.5, 30, 30)
+    const texture = new THREE.TextureLoader().load(marsTexturePath)
+    const hydrogenMaterial =  new THREE.MeshBasicMaterial({map: texture})
     const hydrogen = new THREE.Mesh(hydrogenGeo, hydrogenMaterial)
+    hydrogen.castShadow = true
     hydrogen.position.set(0,0,0)
 
     this.scene.add(hydrogen)
@@ -49,19 +64,19 @@ export class HydrogenAtomComponent implements AfterViewInit {
     let lineMaterial = new THREE.LineBasicMaterial({color: colorLine, linewidth: 1});
     let line = new THREE.Line(lineGeometry, lineMaterial);
     line.rotation.z = 90
+
     //ELETRON
     const eletronGeo = new THREE.SphereGeometry(0.1)
-    const eletronMaterial = new THREE.MeshNormalMaterial() //MeshBasicMaterial({color: colorProton})
+    const eletronMaterial = new THREE.MeshLambertMaterial({color: colorEletron}) //MeshBasicMaterial({color: colorProton})
     const eletron = new THREE.Mesh(eletronGeo, eletronMaterial)
     eletron.position.set(0,3,0)
-    
-    hydrogen.add(eletron)
-
-    //atomSystem.add(eletron)
+    refMesh.add(eletron)
+    //hydrogen.add(eletron)
     
     this.scene.add(line); 
     this.scene.add(hydrogen)
-    //this.scene.add(eletron)
+    //.scene.add(eletron)
+    this.scene.add(refMesh)
 
 
     this.renderer = new THREE.WebGLRenderer()
@@ -80,8 +95,9 @@ export class HydrogenAtomComponent implements AfterViewInit {
     this.renderer.render(this.scene, this.camera) 
 
     const _animate = () => {
-      hydrogen.rotation.z += 0.004
-      //eletronGroup.rotation.y += 0.
+      //hydrogen.rotation.z += 0.004
+      refMesh.rotation.z += 0.009
+      //eletron.rotation.z += 0.0003
       this.controls.update()
       this.renderer.render(this.scene, this.camera)  
       window.requestAnimationFrame(_animate)
