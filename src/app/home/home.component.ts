@@ -9,8 +9,12 @@ export class HomeComponent implements OnInit {
 
   menu:any[] = [
     {
-      label: 'Move camera',
-      url: '',
+      label: 'Hydrogen Atom',
+      url: '/hydrogen-atom'
+    },
+    {
+      label: 'Orbit camera',
+      url: '/orbit-camera',
     },
     {
       label:'Solar System',
@@ -19,10 +23,6 @@ export class HomeComponent implements OnInit {
     {
       label: 'Sun',
       url: '/sun',
-    },
-    {
-      label: 'Sun animation',
-      url: '',
     },
     {
       label: 'Move Light with mouse',

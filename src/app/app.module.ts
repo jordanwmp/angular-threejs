@@ -10,6 +10,8 @@ import { MoveCameraComponent } from './move-camera/move-camera.component';
 import { MoveLightComponent } from './move-light/move-light.component';
 import { SunComponent } from './sun/sun.component';
 import { SolarSystemComponent } from './solar-system/solar-system.component';
+import { OrbitCameraComponent } from './orbit-camera/orbit-camera.component';
+import { HydrogenAtomComponent } from './hydrogen-atom/hydrogen-atom.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { SolarSystemComponent } from './solar-system/solar-system.component';
     MoveCameraComponent,
     MoveLightComponent,
     SunComponent,
-    SolarSystemComponent
+    SolarSystemComponent,
+    OrbitCameraComponent,
+    HydrogenAtomComponent
   ],
   imports: [
     BrowserModule,
