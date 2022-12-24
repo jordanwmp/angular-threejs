@@ -7,7 +7,7 @@ const colorProton:string = "#09a837" //"#5cb85c";
 const colorEletron:string = "#5bc0de";
 const colorLine:string = "#dfe3ee"
 
-const marsTexturePath:string = "../../assets/textures/red_2.jpg"
+const marsTexturePath:string = "../../assets/textures/red_metalic.jpg"
 
 
 @Component({
@@ -30,17 +30,17 @@ export class HydrogenAtomComponent implements AfterViewInit {
       50,
       window.innerWidth/innerHeight,
       1,
-      10000
+      1000
     )
 
     //this.camera.position.set(0,0,0)
     this.scene = new THREE.Scene()
 
 
-    const pointLight = new THREE.PointLight(0xFFFFFF, 0.5)
+    
     const ambientLight = new THREE.AmbientLight(0xFFFFFF)
     this.scene.add(ambientLight) 
-    //this.scene.add(pointLight)
+    
 
     //REFERENCE
     const refGeometry = new THREE.SphereGeometry(0.4)
@@ -50,12 +50,19 @@ export class HydrogenAtomComponent implements AfterViewInit {
     //PROTON
     const hydrogenGeo = new THREE.SphereGeometry(0.5, 30, 30)
     const texture = new THREE.TextureLoader().load(marsTexturePath)
-    const hydrogenMaterial =  new THREE.MeshBasicMaterial({map: texture})
+    const hydrogenMaterial =  new THREE.MeshBasicMaterial({map: texture})//new THREE.MeshBasicMaterial({color: colorEletron})
+     //new THREE.MeshBasicMaterial({map: texture})*/
     const hydrogen = new THREE.Mesh(hydrogenGeo, hydrogenMaterial)
     hydrogen.castShadow = true
     hydrogen.position.set(0,0,0)
 
     this.scene.add(hydrogen)
+
+    const pointLight = new THREE.SpotLight(0xFFFFFF, 1)
+    pointLight.position.z = 30
+    pointLight.position.y = 0
+    pointLight.target = hydrogen
+    //this.scene.add(pointLight)
 
     //ELETRON ORBIT
     let lineGeometry = new THREE.BufferGeometry().setFromPoints(
@@ -80,10 +87,14 @@ export class HydrogenAtomComponent implements AfterViewInit {
 
 
     this.renderer = new THREE.WebGLRenderer()
-    this.renderer.setClearColor(0xF9F9F9)
+    this.renderer.setClearColor("#f8f9fa")  //(0xF9F9F9)
     this.renderer.setSize(window.innerWidth, window.innerHeight)  
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+    this.controls.target = new THREE.Vector3(0,0,0)
+    this.controls.enablePan = false;
+    this.controls.minDistance = 10;
+    this.controls.maxDistance = 20;
 
     //this.camera.position.x = -30
     //this.camera.position.y = 40
@@ -96,7 +107,7 @@ export class HydrogenAtomComponent implements AfterViewInit {
 
     const _animate = () => {
       //hydrogen.rotation.z += 0.004
-      refMesh.rotation.z += 0.009
+      refMesh.rotation.z += 0.01
       //eletron.rotation.z += 0.0003
       this.controls.update()
       this.renderer.render(this.scene, this.camera)  
