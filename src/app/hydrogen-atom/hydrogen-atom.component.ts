@@ -37,7 +37,6 @@ export class HydrogenAtomComponent implements AfterViewInit {
     this.scene = new THREE.Scene()
 
 
-    
     const ambientLight = new THREE.AmbientLight(0xFFFFFF)
     this.scene.add(ambientLight) 
     
