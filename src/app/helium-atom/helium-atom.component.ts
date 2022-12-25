@@ -35,6 +35,8 @@ export class HeliumAtomComponent implements AfterViewInit {
     const ambientLight = new THREE.AmbientLight(0xFFFFFF)
     this.scene.add(ambientLight)
 
+    this.setLights()
+
     this.renderer = new THREE.WebGLRenderer()
     this.renderer.setClearColor("#f8f9fa")
     this.renderer.setSize(window.innerWidth, window.innerHeight)
@@ -54,9 +56,22 @@ export class HeliumAtomComponent implements AfterViewInit {
 
     //PROTON 1
     const protonMaterial = new THREE.MeshBasicMaterial({color: colorProton})
+
+    const pmaterial = new THREE.MeshStandardMaterial({
+      color: 0xFF0000,    // red (can also use a CSS color string here)
+      roughness: 0.51,//0.51
+      metalness: 0.51//0.51
+    });
+    
+    const nmaterial = new THREE.MeshStandardMaterial({
+      color: 0x0000FF,    // red (can also use a CSS color string here)
+      roughness: 0.51,//0.51
+      metalness: 0.51//0.51,
+    });
+
     const protonGeo = new THREE.SphereGeometry(0.5)
-    const proton_1 = new THREE.Mesh(protonGeo, protonMaterial)
-    const proton_2 = new THREE.Mesh(protonGeo, protonMaterial)
+    const proton_1 = new THREE.Mesh(protonGeo, pmaterial)
+    const proton_2 = new THREE.Mesh(protonGeo, pmaterial)
     proton_1.position.set(-0.4, 0, 0)
     proton_2.position.set(0.4, 0, 0)
     this.scene.add(proton_1)
@@ -64,11 +79,19 @@ export class HeliumAtomComponent implements AfterViewInit {
 
     //NEUTROS
     const neutroMaterial = new THREE.MeshBasicMaterial({color: colorEletron})
+    const neutroMaterial2 = new THREE.MeshLambertMaterial(
+      {
+        color: colorEletron, 
+        transparent: true, 
+        opacity: 0.8
+      })
     const neutronGeo = new THREE.SphereGeometry(0.5)
-    const neutron_1 = new THREE.Mesh(neutronGeo, neutroMaterial)
-    const neutron_2 = new THREE.Mesh(neutronGeo, neutroMaterial)
-    neutron_1.position.set(0, 0.8, 0)
-    neutron_2.position.set(0, -0.8, 0)
+    const neutron_1 = new THREE.Mesh(neutronGeo, neutroMaterial2)
+    const neutron_2 = new THREE.Mesh(neutronGeo, neutroMaterial2)
+
+    neutron_1.position.set(0, 0.6, 0)
+    neutron_2.position.set(0, -0.6, 0)
+
     this.scene.add(neutron_1)  
     this.scene.add(neutron_2)
 
@@ -86,8 +109,15 @@ export class HeliumAtomComponent implements AfterViewInit {
     //ELETRONS
     const eletronGeo = new THREE.SphereGeometry(0.1)
     const eletronMaterial = new THREE.MeshLambertMaterial({color: colorEletron})
-    const eletron_1 = new THREE.Mesh(eletronGeo, eletronMaterial)
-    const eletron_2 = new THREE.Mesh(eletronGeo, eletronMaterial)
+
+    const ematerial = new THREE.MeshStandardMaterial({
+      color: 0x7FBF7F,    // red (can also use a CSS color string here)
+      roughness: 0.51,//0.51
+      metalness: 0.51//0.51,
+    });
+
+    const eletron_1 = new THREE.Mesh(eletronGeo, ematerial)
+    const eletron_2 = new THREE.Mesh(eletronGeo, ematerial)
     eletron_1.position.set(0, 3, 0)
     eletron_2.position.set(0, -3, 0)
 
@@ -96,8 +126,8 @@ export class HeliumAtomComponent implements AfterViewInit {
     pointLight_1.position.set(0, 3, 0)
     pointLight_2.position.set(0, -3, 0)
 
-    eletron_1.add(pointLight_1)
-    eletron_2.add(pointLight_2)
+    //eletron_1.add(pointLight_1)
+    //eletron_2.add(pointLight_2)
     //refMesh.add(pointLight_1, pointLight_2)
     refMesh.add(eletron_1, eletron_2)
 
@@ -119,6 +149,28 @@ export class HeliumAtomComponent implements AfterViewInit {
     this.initScene()
   }
 
+  setLights()
+    {
+      const pointLight = new THREE.SpotLight(0xFFFFFF, 8, 50)
+      pointLight.position.z = 35
 
+      const pointLight2 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+      pointLight2.position.z = -35
+
+      const pointLight3 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+      pointLight3.position.y = 35
+
+      const pointLight4 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+      pointLight4.position.y = -35
+
+      const pointLight5 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+      pointLight5.position.x = 35
+
+      const pointLight6 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+      pointLight6.position.x = -35
+
+      
+      this.scene.add(pointLight, pointLight2, pointLight3, pointLight4, pointLight5, pointLight6)
+    }
 
 }

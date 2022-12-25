@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeliumAtomComponent } from './helium-atom/helium-atom.component';
 import { HomeComponent } from './home/home.component';
 import { HydrogenAtomComponent } from './hydrogen-atom/hydrogen-atom.component';
+import { MaterialsComponent } from './materials/materials.component';
 import { MoveLightComponent } from './move-light/move-light.component';
 import { MovimentarObjetoComponent } from './movimentar-objeto/movimentar-objeto.component';
 import { OrbitCameraComponent } from './orbit-camera/orbit-camera.component';
@@ -11,6 +12,7 @@ import { SolarSystemComponent } from './solar-system/solar-system.component';
 import { SunComponent } from './sun/sun.component';
 
 const routes: Routes = [
+  {component: MaterialsComponent, path: 'materials'},
   {component: HeliumAtomComponent, path: 'helium-atom'},
   {component: HydrogenAtomComponent, path: 'hydrogen-atom'},
   {component: OrbitCameraComponent, path: 'orbit-camera'},

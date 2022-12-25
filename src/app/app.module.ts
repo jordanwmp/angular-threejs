@@ -13,6 +13,7 @@ import { SolarSystemComponent } from './solar-system/solar-system.component';
 import { OrbitCameraComponent } from './orbit-camera/orbit-camera.component';
 import { HydrogenAtomComponent } from './hydrogen-atom/hydrogen-atom.component';
 import { HeliumAtomComponent } from './helium-atom/helium-atom.component';
+import { MaterialsComponent } from './materials/materials.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HeliumAtomComponent } from './helium-atom/helium-atom.component';
     SolarSystemComponent,
     OrbitCameraComponent,
     HydrogenAtomComponent,
-    HeliumAtomComponent
+    HeliumAtomComponent,
+    MaterialsComponent
   ],
   imports: [
     BrowserModule,

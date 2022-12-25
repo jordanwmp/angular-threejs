@@ -17,6 +17,10 @@ export class HomeComponent implements OnInit {
       url: '/helium-atom'
     },
     {
+      label: 'Materials',
+      url: '/materials',
+    },
+    {
       label: 'Orbit camera',
       url: '/orbit-camera',
     },

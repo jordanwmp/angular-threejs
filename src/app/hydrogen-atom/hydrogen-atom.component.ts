@@ -33,12 +33,13 @@ export class HydrogenAtomComponent implements AfterViewInit {
       1000
     )
 
+    this.camera.position.z = 10
+
     //this.camera.position.set(0,0,0)
     this.scene = new THREE.Scene()
 
-
     const ambientLight = new THREE.AmbientLight(0xFFFFFF)
-    this.scene.add(ambientLight) 
+    //this.scene.add(ambientLight) 
     
 
     //REFERENCE
@@ -47,21 +48,28 @@ export class HydrogenAtomComponent implements AfterViewInit {
     const refMesh = new THREE.Mesh(refGeometry, refMaterial) 
     
     //PROTON
-    const hydrogenGeo = new THREE.SphereGeometry(0.5, 30, 30)
+
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xFF0000,    // red (can also use a CSS color string here)
+      roughness: 0.60,//0.51
+      metalness: 0.60//0.51
+    }); 
+
+
+    const hydrogenGeo = new THREE.SphereGeometry(0.5, 300, 300)
     const texture = new THREE.TextureLoader().load(marsTexturePath)
     const hydrogenMaterial =  new THREE.MeshBasicMaterial({map: texture})//new THREE.MeshBasicMaterial({color: colorEletron})
      //new THREE.MeshBasicMaterial({map: texture})*/
-    const hydrogen = new THREE.Mesh(hydrogenGeo, hydrogenMaterial)
+    const hydrogen = new THREE.Mesh(hydrogenGeo, material)
     hydrogen.castShadow = true
     hydrogen.position.set(0,0,0)
 
     this.scene.add(hydrogen)
 
-    const pointLight = new THREE.SpotLight(0xFFFFFF, 1)
-    pointLight.position.z = 30
-    pointLight.position.y = 0
-    pointLight.target = hydrogen
-    //this.scene.add(pointLight)
+    const help = new THREE.AxesHelper(50)
+    //this.scene.add(help)
+
+    this.setLights()
 
     //ELETRON ORBIT
     let lineGeometry = new THREE.BufferGeometry().setFromPoints(
@@ -72,11 +80,20 @@ export class HydrogenAtomComponent implements AfterViewInit {
     line.rotation.z = 90
 
     //ELETRON
+
+    const ematerial = new THREE.MeshStandardMaterial({
+      color: 0x0000FF,    // red (can also use a CSS color string here)
+      roughness: 0.51,//0.51
+      metalness: 0.51//0.51
+    }); 
+
     const eletronGeo = new THREE.SphereGeometry(0.1)
     const eletronMaterial = new THREE.MeshLambertMaterial({color: colorEletron}) //MeshBasicMaterial({color: colorProton})
-    const eletron = new THREE.Mesh(eletronGeo, eletronMaterial)
+    const eletron = new THREE.Mesh(eletronGeo, ematerial)
     eletron.position.set(0,3,0)
     refMesh.add(eletron)
+    //refMesh.add(line)
+    //refMesh.add(hydrogen)
     //hydrogen.add(eletron)
     
     this.scene.add(line); 
@@ -97,17 +114,22 @@ export class HydrogenAtomComponent implements AfterViewInit {
 
     //this.camera.position.x = -30
     //this.camera.position.y = 40
-    this.camera.position.z = 30
+    
 
     //this.camera.lookAt(hidrogen.position)
+    //pointLight.target = hydrogen
 
     window.document.getElementById("webgl")?.appendChild(this.renderer.domElement)
     this.renderer.render(this.scene, this.camera) 
 
     const _animate = () => {
-      //hydrogen.rotation.z += 0.004
-      refMesh.rotation.z += 0.01
-      //eletron.rotation.z += 0.0003
+      refMesh.rotation.z += 0.017
+      //refMesh.rotation.x += 0.01
+      //refMesh.rotation.y += 0.01
+
+      //hydrogen.rotation.x += 0.01
+      //hydrogen.rotation.y += 0.01
+
       this.controls.update()
       this.renderer.render(this.scene, this.camera)  
       window.requestAnimationFrame(_animate)
@@ -125,6 +147,30 @@ export class HydrogenAtomComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initScene()    
+  }
+
+  setLights()
+  {
+    const pointLight = new THREE.SpotLight(0xFFFFFF, 8, 50)
+    pointLight.position.z = 20
+
+    const pointLight2 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+    pointLight2.position.z = -20
+
+    const pointLight3 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+    pointLight3.position.y = 20
+
+    const pointLight4 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+    pointLight4.position.y = -20
+
+    const pointLight5 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+    pointLight5.position.x = 20
+
+    const pointLight6 = new THREE.SpotLight(0xFFFFFF, 8, 50)
+    pointLight6.position.x = -20
+
+    
+    this.scene.add(pointLight, pointLight2, pointLight3, pointLight4, pointLight5, pointLight6)
   }
 
 }
