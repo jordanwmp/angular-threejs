@@ -1,0 +1,20 @@
+ul
+{
+    list-style: none;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding-left: 0;
+}
+
+ul li
+{
+    margin-bottom: 10px;
+    padding: 8px;
+    background-color: cornflowerblue;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    min-width: max-content;
+}
+

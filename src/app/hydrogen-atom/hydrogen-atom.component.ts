@@ -103,7 +103,7 @@ export class HydrogenAtomComponent implements AfterViewInit {
 
 
     this.renderer = new THREE.WebGLRenderer()
-    this.renderer.setClearColor("#f8f9fa")  //(0xF9F9F9)
+    this.renderer.setClearColor("#9DA0D0")  //(0xF9F9F9)
     this.renderer.setSize(window.innerWidth, window.innerHeight)  
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)

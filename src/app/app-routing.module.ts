@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { HydrogenAtomComponent } from './hydrogen-atom/hydrogen-atom.component';
 import { MaterialsComponent } from './materials/materials.component';
 import { MoveLightComponent } from './move-light/move-light.component';
+import { MoveOnSpaceComponent } from './move-on-space/move-on-space.component';
 import { MovimentarObjetoComponent } from './movimentar-objeto/movimentar-objeto.component';
 import { OrbitCameraComponent } from './orbit-camera/orbit-camera.component';
 import { SceneComponent } from './scene/scene.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   {component: SunComponent, path: 'sun'},
   {component: MoveLightComponent, path: 'move-light'},
   {component: MovimentarObjetoComponent, path: 'movimentar-objeto'},
+  {component: MoveOnSpaceComponent, path: 'move-on-space'},
   {component: SceneComponent, path: 'scene'},
   {component: HomeComponent, path: 'home'},
   {path: '', redirectTo: '/home', pathMatch: 'full'},

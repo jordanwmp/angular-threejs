@@ -39,6 +39,10 @@ export class HomeComponent implements OnInit {
     {
       label: 'Move object',
       url: '/movimentar-objeto',
+    },
+    {
+      label: 'Move on space',
+      url: '/move-on-space',
     }
   ]
 

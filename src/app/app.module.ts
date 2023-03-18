@@ -14,6 +14,7 @@ import { OrbitCameraComponent } from './orbit-camera/orbit-camera.component';
 import { HydrogenAtomComponent } from './hydrogen-atom/hydrogen-atom.component';
 import { HeliumAtomComponent } from './helium-atom/helium-atom.component';
 import { MaterialsComponent } from './materials/materials.component';
+import { MoveOnSpaceComponent } from './move-on-space/move-on-space.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MaterialsComponent } from './materials/materials.component';
     OrbitCameraComponent,
     HydrogenAtomComponent,
     HeliumAtomComponent,
-    MaterialsComponent
+    MaterialsComponent,
+    MoveOnSpaceComponent
   ],
   imports: [
     BrowserModule,
